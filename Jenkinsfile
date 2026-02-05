@@ -16,5 +16,19 @@ pipeline {
                 sh "docker compose up -d"
             }
         }
+        stage('Webhook Verification') {
+            steps {
+                sh '''
+                    echo "=== WEBHOOK CHECK ==="
+                    echo "BUILD NUMBER: $BUILD_NUMBER"
+                    echo "GIT COMMIT:"
+                    git rev-parse HEAD
+                    echo "GIT BRANCH:"
+                    git branch --show-current
+                    echo "====================="
+                    '''
+            }
+        }
+
     }
 }
