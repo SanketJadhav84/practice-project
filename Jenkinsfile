@@ -6,9 +6,14 @@ pipeline {
                 echo 'Code checked out from GitHub'
             }
         }
-        stage('Build') {
+        stage('Docker Build') {
             steps {
-                echo 'Build stage running'
+                sh "docker build -t practiceimg ."
+            }
+        }
+        stage('Docker compose') {
+            steps {
+                sh "docker-compose up -d"
             }
         }
     }
